@@ -4,7 +4,7 @@
 
 ---
 
-## 📋 Descripción
+## Descripción
 
 **RiskStar** es una nueva metáfora visual que combina **Star Coordinates** con **Glyphs metafóricos** para visualizar datos multidimensionales mixtos del dominio de seguros de autos. 
 
@@ -12,7 +12,7 @@ Esta visualización integra múltiples dimensiones en **UN SOLO GRÁFICO INTERAC
 
 ---
 
-## 🎨 Características Visuales que Codifican Datos
+## Características Visuales que Codifican Datos
 
 Según lo solicitado por el profesor, la metáfora utiliza:
 
@@ -54,7 +54,7 @@ La forma del glyph codifica el **género** del cliente:
 
 ---
 
-## 🔬 Innovación
+##  Innovación
 
 ### ¿Qué hace única a RiskStar?
 
@@ -79,7 +79,7 @@ La forma del glyph codifica el **género** del cliente:
 
 ---
 
-## 🚀 Cómo Usar
+## Cómo Usar
 
 ### Requisitos
 - Navegador moderno (Chrome, Firefox, Safari)
@@ -89,13 +89,13 @@ La forma del glyph codifica el **género** del cliente:
 
 1. **Abrir terminal:**
 ```bash
-cd "/Users/jefersonapaza/Documents/2 - MASTER-CIENCIA-DE-DATOS/1 - CURSOS/8 - VISUALIZACION DE DATOS/PROYECTO FINAL DEL CURSO/IMPLEMENTACION_V2"
+cd "/(carpeta del proyecto)"
 ```
 
 2. **Iniciar servidor:**
 ```bash
 # Con Node.js
-node ../IMPLEMENTACION/server.js
+node ../(carpeta del projecto)/server.js
 
 # O con Python
 python3 -m http.server 8000
@@ -108,7 +108,7 @@ http://localhost:8000
 
 ---
 
-## 🎮 Interacciones
+## Interacciones
 
 ### Controles
 - **Muestra de datos**: Selecciona cuántos registros visualizar (50-500)
@@ -152,7 +152,7 @@ http://localhost:8000
 
 ---
 
-## 🎯 Preguntas Analíticas que Responde
+##  Preguntas Analíticas que Responde
 
 1. **¿Qué perfiles de clientes tienen mayor probabilidad de reclamo?**
    - Observar clusters de glyphs rojos
@@ -192,7 +192,7 @@ http://localhost:8000
 
 ---
 
-## 💡 Innovación vs Estado del Arte
+##  Innovación vs Estado del Arte
 
 | Característica | Star Coordinates Clásicas | RiskStar |
 |----------------|---------------------------|----------|
@@ -313,4 +313,3 @@ Material académico del curso de Visualización de Datos.
 
 ---
 
-**¡Explora tus datos de seguros de una forma completamente nueva con RiskStar!** ⭐
