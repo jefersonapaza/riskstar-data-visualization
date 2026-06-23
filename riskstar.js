@@ -7,7 +7,8 @@
 const STATE = {
   data: [],
   filteredData: [],
-  selectedId: null
+  selectedId: null,
+  zoom: null
 };
 
 // Configuración
@@ -119,11 +120,39 @@ function createRiskStar(data) {
   const radius = Math.min(width, height) / 2 - 100;
   
   svg.attr('viewBox', `0 0 ${width} ${height}`);
-  
-  // Grupo principal
-  const g = svg.append('g')
-    .attr('transform', `translate(${centerX},${centerY})`);
-  
+
+  const zoomLayer = svg.append('g');
+
+  const g = zoomLayer.append('g')
+  .attr('transform', `translate(${centerX},${centerY})`);
+
+  const zoom = d3.zoom()
+  .scaleExtent([0.5, 8])
+  .on("zoom", (event) => {
+    zoomLayer.attr("transform", event.transform);
+  });
+
+  /*
+  .on("zoom", (event) => {
+
+    zoomLayer.attr("transform", event.transform);
+
+    svg.selectAll(".axis-label")
+      .attr(
+        "transform",
+        `translate(${event.transform.x},${event.transform.y}) scale(${1 / event.transform.k})`
+      );
+  });*/
+  /*
+  .on("zoom", (event) => {
+    zoomLayer.attr("transform", event.transform);
+  });*/
+
+STATE.zoom = zoom;
+
+svg.call(zoom);
+
+
   // Número de ejes
   const numAxes = CONFIG.axes.length;
   const angleStep = (2 * Math.PI) / numAxes;
@@ -161,6 +190,17 @@ function createRiskStar(data) {
     const labelX = Math.cos(angle) * labelRadius;
     const labelY = Math.sin(angle) * labelRadius;
     
+    /*
+    g.append('text')
+      .attr('class', 'axis-label')
+      .attr('x', labelX)
+      .attr('y', labelY)
+      .attr('data-x', labelX)
+      .attr('data-y', labelY)
+      .attr('text-anchor', 'middle')
+      .attr('dominant-baseline', 'middle')
+      .text(axis.label);
+    */
     g.append('text')
       .attr('class', 'axis-label')
       .attr('x', labelX)
@@ -168,7 +208,7 @@ function createRiskStar(data) {
       .attr('text-anchor', 'middle')
       .attr('dominant-baseline', 'middle')
       .text(axis.label);
-    
+
     // Círculos de guía
     [0.25, 0.5, 0.75, 1].forEach(ratio => {
       const r = radius * ratio;
@@ -209,6 +249,9 @@ function createRiskStar(data) {
   const glyphs = g.selectAll('.glyph')
     .data(data)
     .join('g')
+    .on("mousedown", (event) => {
+    event.stopPropagation();
+    })
     .attr('class', 'glyph')
     .attr('transform', d => {
       const pos = calculatePosition(d);
@@ -496,6 +539,17 @@ function setupControls() {
     const sampled = sampleData(STATE.data, 100);
     STATE.filteredData = sampled;
     createRiskStar(sampled);
+
+    const svg = d3.select('#mainSvg');
+
+    if (STATE.zoom) {
+      svg.transition()
+        .duration(500)
+        .call(
+          STATE.zoom.transform,
+          d3.zoomIdentity
+        );
+    }
   });
 }
 
